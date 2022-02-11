@@ -9,8 +9,6 @@ geocode();
 
 function geocode() {
 
-
-
   let lacation = 'kyiv';
   axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
     params:{
@@ -18,6 +16,7 @@ function geocode() {
       key: 'AIzaSyAEdCPnYp-3UcR5YGpBuAEYWDMxylK2qlc',
     }
   })
+  
   .then(response => {
     console.log(response);
     let formattedAddress = response.data.results[0].formatted_address;

@@ -7,19 +7,24 @@ const api = {
   base: "https://api.openweathermap.org/data/2.5/",
 }
 
- const getCordinates = (lat, lon) => {
+
+const getCordinates = (lat, lon) => {
   let locationLatitude = lat;
   let locationLongitude = lon; 
   console.log(locationLatitude);
   console.log(locationLongitude);
-  return {locationLatitude, locationLongitude}
+  return {locationLatitude, locationLongitude};
 }
+
 getCordinates()
+
+// const [latitude, setLatitude] = useState([]);
+// const [longitude, setLongitude] = useState([]);
 
 function WeatherSearch() {
   const [query, setQuery] = useState([]);
   const [weather, setWeather] = useState({});
-  
+
   const search = evt => {
     if (evt.key === "Enter") {
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
@@ -32,6 +37,29 @@ function WeatherSearch() {
       });
     }
   }
+
+
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const result = await axios(process.env.REACT_APP_API);
+  //     console.log(result.data.data.results);
+  //     setHeroes(result.data.data.results);
+  //   };
+  //   fetch();
+  // }, []);
+
+  // const search = evt => {
+  //   if (evt.key === "Enter") {
+  //     fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+  //     .then(res => res.json())
+  //     .then(result => {
+  //       setWeather(result);
+  //       setQuery('');
+  //       console.table(result);
+  //       getCordinates((result.coord.lat), (result.coord.lon));
+  //     });
+  //   }
+  // }
 
 //   const ass = (getCordinates) => {
 //     console.log(lat);

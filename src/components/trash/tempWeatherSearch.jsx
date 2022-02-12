@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import GoogleLocation from '../Main/GoogleLocation';
+import GoogleLocation from './GoogleLocation';
 import './WeatherSearch.scss'
 
 const api = {
   key: "3b75e49de3f51189582a63bfa7a0c8c1",
   base: "https://api.openweathermap.org/data/2.5/",
 }
-
-
-// function getCordinates(lat, lon) {
-//   let locationLatitude = lat;
-//   let locationLongitude = lon; 
-//   console.log(locationLatitude);
-//   console.log(locationLongitude);
-//   return {locationLatitude, locationLongitude};
-// }
-// getCordinates()
-
 
 function WeatherSearch() {
   const [query, setQuery] = useState([]);
@@ -25,60 +14,27 @@ function WeatherSearch() {
   const [latitude, setLatitude] = useState([]);
   const [longitude, setLongitude] = useState([]);
 
+  // const [search, setSearch] = useState([]);
 
-  const search = evt => {
-    if (evt.key === "Enter") {
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-      .then(res => res.json())
-      .then(result => {
-        setWeather(result);
-        setQuery('');
-        console.table(result);
-        let coordLat = result.coord.lat;
-        let coordLon = result.coord.lon;
-        setLatitude(coordLat);
-        setLongitude(coordLon);
-        // getCordinates(coordLat, coordLon);
-      });
-    }
-  }
 
   // useEffect(() => {
-  //   const fetch = async () => {
-  //     const result = await axios(process.env.REACT_APP_API);
-  //     console.log(result.data.data.results);
-  //     setHeroes(result.data.data.results);
-  //   };
-  //   fetch();
+    const search = evt => {
+      if (evt.key === "Enter") {
+        fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then(res => res.json())
+        .then(result => {
+          setWeather(result);
+          setQuery('');
+          console.table(result);
+          let coordLat = result.coord.lat;
+          let coordLon = result.coord.lon;
+          setLatitude(coordLat);
+          setLongitude(coordLon);
+          // getCordinates(coordLat, coordLon);
+        });
+      }
+    }
   // }, []);
-
-  // const search = evt => {
-  //   if (evt.key === "Enter") {
-  //     fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-  //     .then(res => res.json())
-  //     .then(result => {
-  //       setWeather(result);
-  //       setQuery('');
-  //       console.table(result);
-  //       getCordinates((result.coord.lat), (result.coord.lon));
-  //     });
-  //   }
-  // }
-
-//   const ass = (getCordinates) => {
-//     console.log(lat);
-//   }
-// ass()
-
-// const getCordinates = () => {
-//   if (typeof weather.coord !== "undefined") {
-//     let locationLatitude = weather.coord.lat;
-//     let locationLongitude = weather.coord.lon; 
-//     return {locationLatitude, locationLongitude};
-//   }
-// }
-// console.log(getCordinates());
-
 
     const dateBuilder = (d) => {
       let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -91,7 +47,6 @@ function WeatherSearch() {
       
       return `${day} ${date} ${month} ${year}`
     }
-    // getCordinates=this.locationLatitude
 
   return (
     <>

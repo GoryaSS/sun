@@ -1,22 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react'
 import axios from 'axios';
 
-
-// console.log(locationLatitude);   
-// console.log(locationLongitude);  
-
-
-
-const GoogleLocation = (coordLatLon) => {
-  // setLongitude(coordLatLon.coordLatLon.latitude);
-  // setLatitude(coordLatLon.coordLatLon.longitude);
-  const [latitude, setLatitude] = useState([]);
-  const [longitude, setLongitude] = useState([]);
-  
-  
-  
-  // console.log(latitude);
-
+const FourDayForecast = () => {
 
   function geocode() {
     let lacation = 'kyiv';
@@ -50,31 +35,13 @@ const GoogleLocation = (coordLatLon) => {
       console.log(error);
     })
   }
-  geocode();
-  
 
   return (
-  <>
-    <div className='formatted-address'></div>
-    <div className='geometry'></div>
-  </>
-  );
-};
+    
+    <div>
+      
+    </div>
+  )
+}
 
-export default GoogleLocation;
-
-
-
-
-  // export const defaultLocation = () => {
-  //   let cytiInput,
-  //   element = document.querySelector('.search-bar');
-  //   if (element != null) {
-  //     cytiInput = element.value;
-  //   }
-  //   else {
-  //     cytiInput = 'Kyiv';
-  //   }
-  //   return cytiInput;
-  // }
-  // console.log(defaultLocation());
+export default FourDayForecast

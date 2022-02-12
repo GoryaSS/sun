@@ -1,7 +1,7 @@
 import React from 'react';
+import "./App.scss"
 import Header from './components/Header/Header';
-// import GoogleLocation from './components/Main/GoogleLocation';
-import WeatherSearch from './components/WeatherSearch/WeatherSearch';
+import MainSection from './components/Main/MainSection';
 
 
 
@@ -9,8 +9,7 @@ function App() {
   return (
     <>
       <Header />
-      {/* <GoogleLocation /> */}
-      <WeatherSearch />
+      <MainSection />
     </>
   );
 }

@@ -1,51 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-geocode();
 
 // console.log(locationLatitude);   
 // console.log(locationLongitude);  
 
 
-function geocode() {
 
-  let lacation = 'kyiv';
-  axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-    params:{
-      address: lacation,
-      key: 'AIzaSyAEdCPnYp-3UcR5YGpBuAEYWDMxylK2qlc',
-    }
-  })
+const GoogleLocation = (coordLatLon) => {
+  // setLongitude(coordLatLon.coordLatLon.latitude);
+  // setLatitude(coordLatLon.coordLatLon.longitude);
+  const [latitude, setLatitude] = useState([]);
+  const [longitude, setLongitude] = useState([]);
   
-  .then(response => {
-    console.log(response);
-    let formattedAddress = response.data.results[0].formatted_address;
-    let formattedAddressOutput = `
-      <ul className="list-group">
-        <li className="list-group-item">${formattedAddress}</li>
-      </ul>
-    `;
-    document.querySelector('.formatted-address').innerHTML = formattedAddressOutput;
+  
+  
+  // console.log(latitude);
 
-    let lat = response.data.results[0].geometry.location.lat;
-    let lng = response.data.results[0].geometry.location.lng;
-    let geometryOutput = `
-    <ul className="list-group">
-      <li className="list-group-item">Lat: ${lat}</li>
-      <li className="list-group-item">Long: ${lng}</li>
-    </ul>
-  `;
 
-   document.querySelector('.geometry').innerHTML = geometryOutput;
+  function geocode() {
+    let lacation = 'kyiv';
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+      params:{
+        address: lacation,
+        key: 'AIzaSyAEdCPnYp-3UcR5YGpBuAEYWDMxylK2qlc',
+      }
+    })
     
-  })  
-  .catch(error => {
-    console.log(error);
-  })
+    .then(response => {
+      // console.log(response);
+      let formattedAddress = response.data.results[0].formatted_address;
+      let formattedAddressOutput = `
+        <ul className="list-group">
+        <li className="list-group-item">${formattedAddress}</li>
+        </ul>
+      `;
+      document.querySelector('.formatted-address').innerHTML = formattedAddressOutput;
   
-}
+      let lat = response.data.results[0].geometry.location.lat;
+      let lng = response.data.results[0].geometry.location.lng;
+      let geometryOutput = `
+      <ul className="list-group">
+        <li className="list-group-item">Lat: ${lat}</li>
+        <li className="list-group-item">Long: ${lng}</li>
+      </ul>`;
+     document.querySelector('.geometry').innerHTML = geometryOutput;
+    })  
+    .catch(error => {
+      console.log(error);
+    })
+  }
+  geocode();
+  
 
-const GoogleLocation = () => {
   return (
   <>
     <div className='formatted-address'></div>

@@ -8,22 +8,23 @@ const api = {
 }
 
 
-const getCordinates = (lat, lon) => {
-  let locationLatitude = lat;
-  let locationLongitude = lon; 
-  console.log(locationLatitude);
-  console.log(locationLongitude);
-  return {locationLatitude, locationLongitude};
-}
+// function getCordinates(lat, lon) {
+//   let locationLatitude = lat;
+//   let locationLongitude = lon; 
+//   console.log(locationLatitude);
+//   console.log(locationLongitude);
+//   return {locationLatitude, locationLongitude};
+// }
+// getCordinates()
 
-getCordinates()
-
-// const [latitude, setLatitude] = useState([]);
-// const [longitude, setLongitude] = useState([]);
 
 function WeatherSearch() {
   const [query, setQuery] = useState([]);
   const [weather, setWeather] = useState({});
+  
+  const [latitude, setLatitude] = useState([]);
+  const [longitude, setLongitude] = useState([]);
+
 
   const search = evt => {
     if (evt.key === "Enter") {
@@ -33,11 +34,14 @@ function WeatherSearch() {
         setWeather(result);
         setQuery('');
         console.table(result);
-        getCordinates((result.coord.lat), (result.coord.lon));
+        let coordLat = result.coord.lat;
+        let coordLon = result.coord.lon;
+        setLatitude(coordLat);
+        setLongitude(coordLon);
+        // getCordinates(coordLat, coordLon);
       });
     }
   }
-
 
   // useEffect(() => {
   //   const fetch = async () => {
@@ -91,7 +95,7 @@ function WeatherSearch() {
 
   return (
     <>
-      {/* <GoogleLocation /> */}
+      {/* <GoogleLocation coordLatLon = {{latitude: latitude, longitude: longitude}}/> */}
       <section className={(typeof weather.main != "undefined") 
       ? ((weather.main.temp > 16) 
       ? 'app warm' 

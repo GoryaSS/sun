@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CurrentWeather from '../WeatherForecasts/CurrentWeather'
 import FourDayForecast from '../WeatherForecasts/FourDayForecast'
+import axios from 'axios';
 import './WeatherSearch.scss'
-
 
 const api = {
   key: "3b75e49de3f51189582a63bfa7a0c8c1",
@@ -16,33 +16,25 @@ function WeatherSearch() {
   const [latitude, setLatitude] = useState([]);
   const [longitude, setLongitude] = useState([]);
 
-  // const [search, setSearch] = useState([]);
+  // const [search, setState] = useState([]);
 
 
   // useEffect(() => {
     const search = evt => {
       if (evt.key === "Enter") {
-        fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then(res => res.json())
-        .then(result => {
-          setWeather(result);
-          setQuery('');
-          console.table(result);
-          let coordLat = result.coord.lat;
-          let coordLon = result.coord.lon;
-          setLatitude(coordLat);
-          setLongitude(coordLon);
-          // getCordinates(coordLat, coordLon);
-        });
+        axios.get(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then(response => setWeather(response.data));
+          setQuery(''); // Return an empty input after a search
+          console.log(weather);
+          setLatitude(weather.coord.lat);
+          setLongitude(weather.coord.lon);
       }
     }
   // }, []);
 
-
-  
+ 
   return (
     <>
-      {/* <GoogleLocation coordLatLon = {{latitude: latitude, longitude: longitude}}/> */}
       <section className={(typeof weather.main != "undefined") 
       ? ((weather.main.temp > 16) 
       ? 'app warm' 
@@ -53,7 +45,7 @@ function WeatherSearch() {
             <input
               type="text"
               className="search-bar"
-              list="country"
+              // list="country"
               placeholder="Search..."
               onChange={e => setQuery(e.target.value)}
               value={query}

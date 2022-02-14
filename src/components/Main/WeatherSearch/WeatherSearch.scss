@@ -1,22 +1,25 @@
 * {
   margin: 0;
   padding: 0;
+  text-decoration: none;
+  color: black;
+  font-family: isocpeur;
   box-sizing: border-box;
 }
 
 .app {
-  background-image: url('../../../img/cold-bg.jpg');
+  background-image: url('../../assets/cold-bg.jpg');
   background-size: cover;
   background-position: bottom;
   transition: all 0.4s ease-in-out;
   font-family: 'monseratt', sans-serif;
   
   &.warm {
-    background-image: url('../../../img/warm-bg.jpg');
+    background-image: url('../../assets/warm-bg.jpg');
   }
 
   main {
-    padding: 25px;
+    padding: 4rem 2rem 2rem;
     min-height: 100vh;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
   }
@@ -31,7 +34,6 @@
     display: block;
     width: 100%;
     padding: 1rem;
-    margin-top: 1rem;
 
     appearance: none;
     background: none;

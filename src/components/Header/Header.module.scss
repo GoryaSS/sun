@@ -1,0 +1,57 @@
+@import url("./var.css");
+
+.headers {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.headers .logo-wrapper {
+  height: 60px;
+  margin-left: 35px;
+}
+.headers .nav__comp {
+  height: 100%;
+  margin-right: 20px;
+}
+.headers .nav__list {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  height: 100%;
+  list-style: none;
+  text-align: center;
+}
+.headers .nav__item a {
+  position: relative;
+  width: 100px;
+  padding: 0 10px;
+  font-size: var(--header-fnt-size);
+  text-transform: uppercase;
+  color: var(--header-fnt-color);
+  transition: all 0.3s ease-in-out;
+}
+
+.headers .nav__item a:hover {
+  color: var(--course-fnt-color);
+}
+
+.headers .nav__item a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -3px;
+  border-bottom: 3px solid rgb(187, 0, 0);
+  transform: scaleX(0);
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.headers .nav__item a:hover::before {
+  transform: scaleX(1);
+  transform: scaleX(1);
+}

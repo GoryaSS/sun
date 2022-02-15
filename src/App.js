@@ -14,11 +14,21 @@ const api = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const element = document.getElementById('toggle');
+  const navBar = document.getElementById('toggleNavBar');
   const trigger = document.getElementById('trigger');
 
   trigger.addEventListener('click', () => {
-    element.classList.toggle('active');
+    navBar.classList.toggle('active');
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const burgerBut = document.getElementById('toggleBurgerBut');
+  const trigger = document.getElementById('trigger');
+
+  trigger.addEventListener('click', () => {
+    burgerBut.classList.toggle('active');
   });
 });
 
@@ -61,7 +71,7 @@ function App() {
             onKeyPress={search}
           />
         </div>
-        <nav id="toggle" className={styles["nav__comp"]}>
+        <nav id="toggleNavBar" className={styles["nav__comp"]}>
           <ul className={styles["nav__list"]}>
             <li className={styles["nav__item"]}>
               <a className={styles["course-home"]} href="#">today</a>
@@ -80,10 +90,12 @@ function App() {
             </li>
           </ul>
           <div id="trigger" className="nav-burger">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+            <div id="toggleBurgerBut" className="nav-burger__container">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
         </nav>
       </header>

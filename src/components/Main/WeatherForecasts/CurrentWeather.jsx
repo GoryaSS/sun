@@ -30,7 +30,7 @@ const CurrentWeather = (weatherTemp) => {
             <div className='temp'>
               {Math.round(weatherTemp.weatherTemp.main.temp)}°C
             </div>
-            <div className='weather'>{weatherTemp.weatherTemp.weather[0].main}</div>
+            <div className='weather-condition'>{weatherTemp.weatherTemp.weather[0].main}</div>
           </div>
         </div>
       ) :('')}

@@ -3,7 +3,11 @@
 .headers {
   width: 100%;
   position: absolute;
-  display: flex;
+  display: grid;
+  grid-template-areas:
+    "logo search navbar";
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 2fr 2fr;
   justify-content: space-between;
   align-items: center;
   color: #fff;
@@ -12,11 +16,43 @@
 .headers .logo-wrapper {
   height: 60px;
   margin-left: 35px;
+  grid-area: logo;
 }
+@media (max-width: 1324px) {
+  .headers {
+  grid-template-columns: 1fr 2fr 4fr;
+    
+  }
+  }
+@media (max-width: 768px) {
+  .headers {
+    grid-template-areas:
+    "logo navbar"
+    "search search";
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .headers .logo-wrapper {
+    // display: none;
+  margin-left: 26px;
+    
+  }
+  .headers .nav__list {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    height: 100%;
+    list-style: none;
+    text-align: center;
+  }
+}
+
 .headers .nav__comp {
   height: 100%;
   margin-right: 20px;
+  grid-area: navbar;
 }
+
 .headers .nav__list {
   display: grid;
   grid-auto-flow: column;
@@ -25,6 +61,7 @@
   list-style: none;
   text-align: center;
 }
+
 .headers .nav__item a {
   position: relative;
   width: 100px;
@@ -55,3 +92,5 @@
   transform: scaleX(1);
   transform: scaleX(1);
 }
+
+

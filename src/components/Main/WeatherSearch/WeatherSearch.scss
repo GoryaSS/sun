@@ -1,37 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  color: black;
-  font-family: isocpeur;
-  box-sizing: border-box;
-}
 
-.weather {
-  background-image: url('../../assets/cold-bg.jpg');
-  background-size: cover;
-  background-position: bottom;
-  transition: all 0.4s ease-in-out;
-  font-family: 'monseratt', sans-serif;
-  
-  &.warm {
-    background-image: url('../../assets/warm-bg.jpg');
-  }
-
-  .container {
-    padding: 4rem 2rem 2rem;
-    min-height: 100vh;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
-  }
-  
-}
 
 .search-box {
     padding: 0 2rem;
     // width: 100%;
     grid-area: search;
     
-    @media (max-width: 1324px) {
+    @media (max-width: 1024) {
     // width: 70%;
     }
     @media (max-width: 768px) {

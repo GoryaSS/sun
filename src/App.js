@@ -71,8 +71,8 @@ function App() {
             onKeyPress={search}
           />
         </div>
-        <nav id="toggleNavBar" className={styles["nav__comp"]}>
-          <ul className={styles["nav__list"]}>
+        <nav className={styles["nav__comp"]}>
+          <ul  id="toggleNavBar" className={styles["nav__list"]}>
             <li className={styles["nav__item"]}>
               <a className={styles["course-home"]} href="#">today</a>
             </li>

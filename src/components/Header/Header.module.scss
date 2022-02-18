@@ -4,8 +4,7 @@
   width: 100%;
   position: absolute;
   display: grid;
-  grid-template-areas:
-    "logo search navbar";
+  grid-template-areas: "logo search navbar";
   grid-auto-flow: column;
   grid-template-columns: 1fr 2fr 2fr;
   justify-content: space-between;
@@ -18,33 +17,48 @@
   margin-left: 35px;
   grid-area: logo;
 }
-@media (max-width: 1324px) {
+
+@media (max-width: 1280px) {
   .headers {
-  grid-template-columns: 1fr 2fr 4fr;
-    
+    grid-template-columns: 1fr 2fr 4fr;
   }
-  }
+}
+
 @media (max-width: 768px) {
   .headers {
     grid-template-areas:
-    "logo navbar"
-    "search search";
+      "logo navbar"
+      "search search";
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-  }
-  .headers .logo-wrapper {
-    // display: none;
-  margin-left: 26px;
+
+    .logo-wrapper {
+      // display: none;
+      margin-left: 26px;
+    }
+
+    // .nav__list {
+    //   display: none;
+
+    //   &.active {
+    //     display: block;
+
+    //   }
+    // }
     
+    // .active {
+    //     display: grid;
+    //   }
   }
-  .headers .nav__list {
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    height: 100%;
-    list-style: none;
-    text-align: center;
-  }
+
+  // .headers .nav__list .active {
+  //   display: grid;
+  //   grid-auto-flow: column;
+  //   align-items: center;
+  //   height: 100%;
+  //   list-style: none;
+  //   text-align: center;
+  // }
 }
 
 .headers .nav__comp {
@@ -92,5 +106,3 @@
   transform: scaleX(1);
   transform: scaleX(1);
 }
-
-

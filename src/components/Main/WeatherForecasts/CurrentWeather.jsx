@@ -20,20 +20,36 @@ const CurrentWeather = (weatherTemp) => {
 
   return (
     <>
-      {(typeof weatherTemp.weatherTemp.main !== "undefined") ? (
-        <div>
+      {
+        (typeof weatherTemp.weatherTemp.main !== "undefined") ? (
+          <div>
+            <div className='location-box'>
+              <div className='location'>{weatherTemp.weatherTemp.name}, {weatherTemp.weatherTemp.sys.country}</div>
+              <div className='date'>{dateBuilder()}</div>
+            </div>
+            <div className='weather-box'>
+              <div className='temp'>
+                {Math.round(weatherTemp.weatherTemp.main.temp)}°C
+              </div>
+              <div className='weather-condition'>{weatherTemp.weatherTemp.weather[0].main}</div>
+            </div>
+          </div>
+        ) : 
+        (
+          <div>
           <div className='location-box'>
-            <div className='location'>{weatherTemp.weatherTemp.name}, {weatherTemp.weatherTemp.sys.country}</div>
+            <div className='location'>хуйня якась</div>
             <div className='date'>{dateBuilder()}</div>
           </div>
           <div className='weather-box'>
             <div className='temp'>
-              {Math.round(weatherTemp.weatherTemp.main.temp)}°C
+              піздєц
             </div>
-            <div className='weather-condition'>{weatherTemp.weatherTemp.weather[0].main}</div>
+            <div className='weather-condition'>ніхуя не ясно</div>
           </div>
         </div>
-      ) :('')}
+        )
+      }
     </>
   )
 }

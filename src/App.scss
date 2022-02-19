@@ -31,10 +31,12 @@ body {
 
 .nav-burger {
   position: absolute;
-  right: 55px;
+  right: 30px;
   top: 35px;
   transform: translate(50%, -50%);
   // grid-area: burger;
+  z-index: 10;
+
 }
 
 @media (min-width: 769px) {
@@ -56,10 +58,10 @@ body {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
+  // -webkit-transition: 0.5s ease-in-out;
+  // -moz-transition: 0.5s ease-in-out;
+  // -o-transition: 0.5s ease-in-out;
+  // transition: 0.5s ease-in-out;
   cursor: pointer;
 
   span {

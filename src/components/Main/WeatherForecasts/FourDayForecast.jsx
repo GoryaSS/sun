@@ -1,7 +1,13 @@
 import React from 'react'
 import axios from 'axios';
 
-const FourDayForecast = () => {
+
+
+
+const FourDayForecast = (latitude, longitude) => {
+
+  // console.log(latitude)
+  // console.log(longitude)
 
   function geocode() {
     let lacation = 'kyiv';
@@ -45,3 +51,7 @@ const FourDayForecast = () => {
 }
 
 export default FourDayForecast
+
+
+
+// https://maps.googleapis.com/maps/api/geocode/json?latlng=50.4114128,30.6177139&sensor=true&key=AIzaSyAEdCPnYp-3UcR5YGpBuAEYWDMxylK2qlc

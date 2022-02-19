@@ -4,7 +4,7 @@ import CurrentWeather from './components/Main/WeatherForecasts/CurrentWeather'
 import FourDayForecast from './components/Main/WeatherForecasts/FourDayForecast'
 import "./App.scss"
 import './components/Main/WeatherSearch/WeatherSearch.scss'
-import styles from './components/Header/Header.module.scss';
+import './components/Header/Header.scss';
 import weatherIcon from './components/assets/weather-icon.png'
 
 
@@ -40,11 +40,12 @@ function App() {
   const [latitude, setLatitude] = useState([]);
   const [longitude, setLongitude] = useState([]);
 
+
   const search = evt => {
     if (evt.key === "Enter") {
       axios.get(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
         .then(response => setWeather(response.data));
-      setQuery(''); // Return an empty input after a search
+      setQuery(''); // Return an empty input after search a plase
       console.log(weather);
       setLatitude(weather.coord.lat);
       setLongitude(weather.coord.lon);
@@ -53,12 +54,10 @@ function App() {
 
   return (
     <div>
-      {/* <div id="toggle">
-        <p id="trigger">Click to toggle</p>
-      </div> */}
-      <header className={styles['headers']}>
-        <div className={styles["logo-wrapper"]}>
-          <a className={styles["logo-course"]} href="#"><img src={weatherIcon} alt="logo img" height="100%" /></a>
+
+      <header className={'headers'}>
+        <div className={"logo-wrapper"}>
+          <a className={"logo-course"} href="#"><img src={weatherIcon} alt="logo img" height="100%" /></a>
         </div>
         <div className='search-box'>
           <input
@@ -71,33 +70,36 @@ function App() {
             onKeyPress={search}
           />
         </div>
-        <nav className={styles["nav__comp"]}>
-          <ul  id="toggleNavBar" className={styles["nav__list"]}>
-            <li className={styles["nav__item"]}>
-              <a className={styles["course-home"]} href="#">today</a>
-            </li>
-            <li className={styles["nav__item"]}>
-              <a className={styles["contacts-course"]} href="#">1 hour</a>
-            </li>
-            <li className={styles["nav__item"]}>
-              <a className={styles["content-course"]} href="#">48 hours</a>
-            </li>
-            <li className={styles["nav__item"]}>
-              <a id={styles["about-course"]} href="#">7 days</a>
-            </li>
-            <li className={styles["nav__item"]}>
-              <a className={styles["login-course"]} href="#">sign in</a>
-            </li>
-          </ul>
-          <div id="trigger" className="nav-burger">
-            <div id="toggleBurgerBut" className="nav-burger__container">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
+        <nav id="toggleNavBar" className={"nav__comp"}>
+          {/* <div className='nav_container'> */}
+            <ul className={"nav__list"}>
+              <li className={"nav__item"}>
+                <a className={"course-home"} href="#">today</a>
+              </li>
+              <li className={"nav__item"}>
+                <a className={"contacts-course"} href="#">1 hour</a>
+              </li>
+              <li className={"nav__item"}>
+                <a className={"content-course"} href="#">48 hours</a>
+              </li>
+              <li className={"nav__item"}>
+                <a id={"about-course"} href="#">7 days</a>
+              </li>
+              <li className={"nav__item"}>
+                <a className={"login-course"} href="#">sign in</a>
+              </li>
+            </ul>
+          {/* </div> */}
+
         </nav>
+        <div id="trigger" className="nav-burger">
+          <div id="toggleBurgerBut" className={"nav-burger__container"}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </header>
 
       <main className={(typeof weather.main != "undefined")
@@ -107,7 +109,7 @@ function App() {
         : 'weather'}>
         <div className='container'>
           <CurrentWeather weatherTemp={weather} />
-          <FourDayForecast />
+          <FourDayForecast latitude={latitude} longitude={longitude}/>
         </div>
       </main>
 
@@ -118,24 +120,23 @@ function App() {
 export default App;
 
 
+let options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
 
-// var options = {
-//   enableHighAccuracy: true,
-//   timeout: 5000,
-//   maximumAge: 0
-// };
+function success(pos) {
+  let crd = pos.coords;
 
-// function success(pos) {
-//   var crd = pos.coords;
+  console.log('Ваше текущее местоположение:');
+  console.log(`Широта: ${crd.latitude}`);
+  console.log(`Долгота: ${crd.longitude}`);
+  console.log(`Плюс-минус ${crd.accuracy} метров.`);
+};
 
-//   console.log('Ваше текущее местоположение:');
-//   console.log(`Широта: ${crd.latitude}`);
-//   console.log(`Долгота: ${crd.longitude}`);
-//   console.log(`Плюс-минус ${crd.accuracy} метров.`);
-// };
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+};
 
-// function error(err) {
-//   console.warn(`ERROR(${err.code}): ${err.message}`);
-// };
-
-// navigator.geolocation.getCurrentPosition(success, error, options);
+navigator.geolocation.getCurrentPosition(success, error, options);

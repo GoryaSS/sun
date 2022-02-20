@@ -7,9 +7,8 @@ import './components/Main/WeatherSearch/WeatherSearch.scss'
 import './components/Header/Header.scss';
 import weatherIcon from './components/assets/weather-icon.png'
 
-
 const api = {
-  key: "3b75e49de3f51189582a63bfa7a0c8c1",
+  key: process.env.REACT_APP_WEATHER_API_KEY,
   base: "https://api.openweathermap.org/data/2.5/",
 }
 
@@ -21,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     navBar.classList.toggle('active');
   });
 });
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const burgerBut = document.getElementById('toggleBurgerBut');
@@ -35,22 +33,52 @@ document.addEventListener('DOMContentLoaded', () => {
 function App() {
 
   const [query, setQuery] = useState([]);
-  const [weather, setWeather] = useState({});
-
-  const [latitude, setLatitude] = useState([]);
-  const [longitude, setLongitude] = useState([]);
-
-
+  const [weather, setWeather] = useState([]);
   const search = evt => {
     if (evt.key === "Enter") {
       axios.get(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then(response => setWeather(response.data));
+      .then(response => setWeather(response.data))
       setQuery(''); // Return an empty input after search a plase
-      console.log(weather);
-      setLatitude(weather.coord.lat);
-      setLongitude(weather.coord.lon);
+      // setLatitude(weather.coord);
+      // setLongitude(weather.coord);
     }
   }
+
+
+  
+  // // GET LATITUDE
+  
+  // const [latitude, setLatitude] = useState([]);
+  // useEffect(() => {
+  //   setLatitude(weather);
+  // }, [weather])
+
+  // function getLat(e) {
+  //   if (e === undefined) {
+  //     return 'Undefined value!';
+  //   }
+  //   return e.lat;
+  // }
+  // let lat = latitude.coord;
+  // let resLat = getLat(lat);
+  // // console.log(resLat);
+
+  // // GET LONGITUDE
+
+  // const [longitude, setLongitude] = useState([]);
+  // useEffect(() => {
+  //   setLongitude(weather);
+  // }, [weather])
+
+  // function getLon(e) {
+  //   if (e === undefined) {
+  //     return 'Undefined value!';
+  //   }
+  //   return e.lon;
+  // }
+  // let lon = longitude.coord;
+  // let resLon = getLon(lon);
+  // // console.log(resLon);
 
   return (
     <div>
@@ -63,11 +91,11 @@ function App() {
           <input
             type="text"
             className="search-bar"
-            // list="country"
+            // TODO: list="country"
             placeholder="Search..."
             onChange={e => setQuery(e.target.value)}
             value={query}
-            onKeyPress={search}
+            onKeyPress={search}   
           />
         </div>
         <nav id="toggleNavBar" className={"nav__comp"}>
@@ -101,15 +129,14 @@ function App() {
           </div>
         </div>
       </header>
-
       <main className={(typeof weather.main != "undefined")
         ? ((weather.main.temp > 16)
-          ? 'weather warm'
-          : 'weather')
+        ? 'weather warm'
+        : 'weather')
         : 'weather'}>
         <div className='container'>
           <CurrentWeather weatherTemp={weather} />
-          <FourDayForecast latitude={latitude} longitude={longitude}/>
+          <FourDayForecast inputWeather = {weather}/>
         </div>
       </main>
 
@@ -120,23 +147,23 @@ function App() {
 export default App;
 
 
-let options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
+// let options = {
+//   enableHighAccuracy: true,
+//   timeout: 5000,
+//   maximumAge: 0
+// };
 
-function success(pos) {
-  let crd = pos.coords;
+// function success(pos) {
+//   let crd = pos.coords;
 
-  console.log('Ваше текущее местоположение:');
-  console.log(`Широта: ${crd.latitude}`);
-  console.log(`Долгота: ${crd.longitude}`);
-  console.log(`Плюс-минус ${crd.accuracy} метров.`);
-};
+//   console.log('Ваше текущее местоположение:');
+//   console.log(`Широта: ${crd.latitude}`);
+//   console.log(`Долгота: ${crd.longitude}`);
+//   console.log(`Плюс-минус ${crd.accuracy} метров.`);
+// };
 
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-};
+// function error(err) {
+//   console.warn(`ERROR(${err.code}): ${err.message}`);
+// };
 
-navigator.geolocation.getCurrentPosition(success, error, options);
+// navigator.geolocation.getCurrentPosition(success, error, options);

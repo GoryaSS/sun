@@ -1,47 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
+const googleApi = {
+  key: process.env.REACT_APP_GOOGLE_API_KEY,
+}
 
-
-const FourDayForecast = (latitude, longitude) => {
-
-  // console.log(latitude)
-  // console.log(longitude)
-
-  function geocode() {
-    let lacation = 'kyiv';
-    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-      params:{
-        address: lacation,
-        key: 'AIzaSyAEdCPnYp-3UcR5YGpBuAEYWDMxylK2qlc',
-      }
-    })
-    
-    .then(response => {
-      // console.log(response);
-      let formattedAddress = response.data.results[0].formatted_address;
-      let formattedAddressOutput = `
-        <ul className="list-group">
-        <li className="list-group-item">${formattedAddress}</li>
-        </ul>
-      `;
-      document.querySelector('.formatted-address').innerHTML = formattedAddressOutput;
+const FourDayForecast = (inputWeather) => {
   
-      let lat = response.data.results[0].geometry.location.lat;
-      let lng = response.data.results[0].geometry.location.lng;
-      let geometryOutput = `
-      <ul className="list-group">
-        <li className="list-group-item">Lat: ${lat}</li>
-        <li className="list-group-item">Long: ${lng}</li>
-      </ul>`;
-     document.querySelector('.geometry').innerHTML = geometryOutput;
-    })  
-    .catch(error => {
-      console.log(error);
-    })
-  }
+  // GET LATITUDE
+  
+  const [latitude, setLatitude] = useState([]);
+  useEffect(() => {
+    setLatitude(inputWeather.inputWeather);
+  }, [inputWeather.inputWeather])
 
+  function getLat(e) {
+    if (e === undefined) {
+      return 'Undefined value!';
+    }
+    return e.lat;
+  }
+  let lat = latitude.coord;
+  let resLat = getLat(lat);
+  // console.log(resLat);
+
+  // GET LONGITUDE
+
+  const [longitude, setLongitude] = useState([]);
+  useEffect(() => {
+    setLongitude(inputWeather.inputWeather);
+  }, [inputWeather.inputWeather])
+
+  function getLon(e) {
+    if (e === undefined) {
+      return 'Undefined value!';
+    }
+    return e.lon;
+  }
+  let lon = longitude.coord;
+  let resLon = getLon(lon);
+  // console.log(resLon);
+
+
+
+
+  const [city, setCity] = useState({});
+  
+  function geocode() {
+    // axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat.latitude},${lat.longitude}&sensor=true&key=${googleApi.key}`)
+    // .then(response => setCity(response.data.results[0]))
+    // console.log(city);
+    // .catch(error => {
+    //   console.log(error);
+    // })
+  }
+  geocode();
+  
   return (
     
     <div>
@@ -50,7 +65,7 @@ const FourDayForecast = (latitude, longitude) => {
   )
 }
 
-export default FourDayForecast
+export default FourDayForecast;
 
 
 

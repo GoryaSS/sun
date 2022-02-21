@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-
-const googleApi = {
-  key: process.env.REACT_APP_GOOGLE_API_KEY,
-}
-
 const FourDayForecast = (inputWeather) => {
   
   // GET LATITUDE
@@ -43,30 +38,51 @@ const FourDayForecast = (inputWeather) => {
   // console.log(resLon);
 
 
-
-
-  const [city, setCity] = useState({});
-  
-  function geocode() {
-    // axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat.latitude},${lat.longitude}&sensor=true&key=${googleApi.key}`)
-    // .then(response => setCity(response.data.results[0]))
-    // console.log(city);
-    // .catch(error => {
-    //   console.log(error);
-    // })
+  async function getData() {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    let data = [];
+    if (response.ok) {
+      data = await response.json();
+    }
+    return data;
   }
-  geocode();
+
+  async function createContacts() {
+    const containerContacts = document.createElement('div');
+    containerContacts.className = 'contacts-course__container';
+    const dataServer = await getData();
+    dataServer.forEach(item => {
+      containerContacts.append(showElement(item.name, item.address, item.email));
+    });
+    return containerContacts;
+  }
+
+  function showElement(name, address, email) {
+    const itemElement = document.createElement('div');
+    itemElement.className = 'item-data';
   
+    const nameData = document.createElement('h2');
+    nameData.textContent = name;
+  
+    const userEmail = document.createElement('h3');
+    userEmail.textContent = email;
+  
+    const textData = document.createElement('p');
+    const userAdsress = (JSON.stringify(address));
+    textData.textContent = userAdsress;
+  
+    itemElement.append(nameData);
+    itemElement.append(userEmail);
+    itemElement.append(textData);
+    return itemElement;
+  }
+
   return (
     
     <div>
-      
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, vel id autem nostrum nobis quis, odio nisi repellendus sunt est expedita at quibusdam ipsum amet libero harum illo, numquam ipsam?</p>
     </div>
   )
 }
 
 export default FourDayForecast;
-
-
-
-// https://maps.googleapis.com/maps/api/geocode/json?latlng=50.4114128,30.6177139&sensor=true&key=AIzaSyAEdCPnYp-3UcR5YGpBuAEYWDMxylK2qlc

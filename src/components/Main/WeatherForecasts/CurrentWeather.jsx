@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./CurrentWeather.scss"
 
-const googleApi = {
-  key: process.env.REACT_APP_GOOGLE_API_KEY,
-  base: "https://maps.googleapis.com/maps/api/geocode/json",
-}
 const api = {
   key: process.env.REACT_APP_WEATHER_API_KEY,
   base: "https://api.openweathermap.org/data/2.5/weather",
@@ -25,8 +21,6 @@ const CurrentWeather = (weatherTemp) => {
     
     return `${day} ${date} ${month} ${year}`
   }
-  // console.log(dateBuilder());
-  // console.log(weatherTemp.weatherTemp.main);
 
   // HERE IS CURRENT GEOPOSITION 
 
@@ -49,29 +43,6 @@ const CurrentWeather = (weatherTemp) => {
 
   const [latCurCity, setLatCurCity] = useState([]);
   const [lonCurCity, setLonCurCity] = useState([]);
-  console.log(latCurCity); 
-
-  const [city, setCity] = useState([]);
-
-  useEffect(() => {
-    function getCurrentCity() {
-      axios.get(`${googleApi.base}?latlng=${latCurCity && 50.4333},${lonCurCity && 30.5167}&sensor=true&key=${googleApi.key}`)
-      .then(response => setCity(response.data.results))
-      .then(response => setCurrentCityName(city[0].address_components[1].short_name))
-      .catch(error => {
-        console.log(error);
-      })
-    }
-    getCurrentCity();
-  }, []);
-
-  console.log(city);
-  // console.log(city[0].address_components[1].short_name);
-  // {city[0].address_components[1].short_name}, {city[0].address_components[3].long_name}
-  const [currentCityName, setCurrentCityName] = useState([]);
-  console.log(currentCityName);
-
-
 
   // HERE IS THE WEATHER IN THE CURRENT GEOPOSITION
 
@@ -86,10 +57,7 @@ const CurrentWeather = (weatherTemp) => {
     }
     getCurrentWeather();
   }, []);
-  console.log(weatherCurPos);
 
-
-  
   return (
     <>
       {

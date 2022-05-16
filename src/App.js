@@ -53,6 +53,8 @@ function App() {
       setQuery(''); // Return an empty input after search a plase
       // setLatitude(weather.coord);
       // setLongitude(weather.coord);
+      // Prevendefaul
+      // stopPropagination
     }
   }
 
